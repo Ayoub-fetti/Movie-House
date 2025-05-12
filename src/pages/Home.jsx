@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const API_KEY = '911a6476072a4392187ba7a5051e199a'; 
 
@@ -11,7 +12,16 @@ function Home() {
     useEffect(() => {
         setLoading(true);
         setError(null);
-        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=fr-FR&page=1`)
+        let url = "";
+       if (search.trim() === "") {
+            url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=fr-FR&page=1`;
+        } else {
+            url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=fr-FR&query=${encodeURIComponent(search)}&page=1&include_adult=false`;
+        }
+
+
+
+        fetch(url)
             .then(res => {
                 if (!res.ok) throw new Error("Erreur lors du chargement des films.");
                 return res.json();
@@ -25,7 +35,7 @@ function Home() {
                 setError(err.message);
                 setLoading(false);
             });
-    }, []);
+    }, [search]);
 
     const filteredMovies = movies.filter(movie =>
         movie.title.toLowerCase().includes(search.toLowerCase())
@@ -52,8 +62,11 @@ function Home() {
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                     {filteredMovies.map(movie => (
-                        <div key={movie.id} className="bg-gradient-to-r from-[#662D8C] to-[#ED1E79] text-white rounded-lg overflow-hidden shadow-lg hover:shadow-[#662D8C]">
-                            <img
+                        <Link
+                            to={`/details/${movie.id}`}
+                            key={movie.id}
+                            className="bg-gradient-to-r from-[#662D8C] to-[#ED1E79] text-white rounded-lg overflow-hidden shadow-lg shadow-[#d76b9a] hover:shadow-[#662D8C] transition-transform hover:scale-105"
+                        >                            <img
                                 src={movie.poster_path ? `https://image.tmdb.org/t/p/w300${movie.poster_path}` : "https://via.placeholder.com/300x450?text=No+Image"}
                                 alt={movie.title}
                                 className="w-full h-64 object-cover"
@@ -63,7 +76,7 @@ function Home() {
                                 <p className="mt-2">⭐ {movie.vote_average} / 10</p>
                                 <p className="text-sm font-bold text-gray-200 ml-6">{movie.release_date}</p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             )}
