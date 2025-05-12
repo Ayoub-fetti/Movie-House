@@ -1,11 +1,11 @@
-import reactLogo from '../assets/react.svg'
+import reactLogo from '../assets/logo.gif'
 import { Link } from 'react-router-dom'
 function Navbar(){
     return (
         <nav className='flex items-center justify-between px-8 py-3 bg-gray-900 text-white'>
             <div className='flex items-center'>
-                <img src={reactLogo} alt="Logo" className='w-10 mr-3'/>
-                <span className='font-bold text-xl'>Movie House</span>
+                <img src={reactLogo} alt="Logo" className='w-10 mr-3 rounded-full'/>
+                <span className='font-bold text-xl text-yellow-500'>MovieHouse</span>
             </div>
             <ul className='flex space-x-8'>
                 <li>
