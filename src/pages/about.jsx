@@ -24,7 +24,7 @@ const About = () => {
             <Clapperboard className="mx-auto mb-4 text-pink-600" size={48} />
             <h2 className="text-2xl font-bold mb-4">Bienvenue sur MovieHouse</h2>
             <p className="text-lg max-w-2xl mx-auto">
-              Une plateforme créée par des passionnés de cinéma, pour des passionnés de cinéma.
+              Une plateforme créée par des passionnés de cinéma.
             </p>
           </div>
           
