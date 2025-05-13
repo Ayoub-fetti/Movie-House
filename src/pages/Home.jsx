@@ -46,7 +46,7 @@ function Home() {
             <div className="flex justify-center">
                 <input
                     type="text"
-                    placeholder="search"
+                    placeholder="recherche..."
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     className="mb-6 px-4 py-2 w-full max-w-md text-white rounded-4xl border border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#662D8C]"
